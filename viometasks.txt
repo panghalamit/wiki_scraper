@@ -1,0 +1,18 @@
+1. There is a raw unformatted 1TB drive on the server attached as /dev/sdg. Please format the the drive using any filesystem you like. Ext3 is fine. Please mount the drive as /prod 
+2. Download and install JDK [Oracle/Sun version not OpenJDK] 
+3. Download and install Tomcat or Jetty
+4. Download and install MySQL or other open source database 
+5. Create a  Database named wiki and a table to store the content of pages on wikipedia. The schema should include Title, Body, References and URL. 
+6. Download 10000 Wikipedia articles. The articles should be in English and in Japanese.
+7. Create an Java program that takes a parameter in the range from 1 to 10,000 that returns the equivalent article from your database. 
+8. Write a SQL query to allow leading wild card search on title.
+9. Write a Java Program that runs the same SQL and returns the result to a file 
+10. Write a Java Program that run the same SQL and returns the result  with each word reversed. For example if the orginal text content is "the quick brown fox" the result will return "eht kciuq nworb xof" 
+11. Create a Maven project to compile and build the Java Programs that you have developed. You may also using a linux shell script or other utility to build your code.
+12. Download and install mongodb  
+13. Create a collection named content in Mongodb 
+14. Write a script to query 1000  wiki docs from the MySQL database into the Mongodb collection. If you prefer not to use Mongodb for this and the previous 2 steps you may substitute another open source database or Dynamodb
+15. Please post your code to github when complete.
+
+If there are any questions please reach out. As a bonus you may write the same programs above in python.
+
