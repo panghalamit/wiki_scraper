@@ -3,14 +3,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.io.IOException;
 import java.sql.ResultSetMetaData;
-class SimpleQueryTask {
+class WildCardTitleSearch {
 
 static Connection conn = null;
-static Statement stmt = null;
+static PreparedStatement pstmt = null;
 static ResultSet rs = null;
   public static void main(String[] args) {
     try {
@@ -26,17 +26,14 @@ static ResultSet rs = null;
            DriverManager.getConnection("jdbc:mysql://localhost:3306/wiki", "root", "vanwilder");
 
         // Do something with the Connection
-        System.out.println("Input article number between 1 and 10000");
+        System.out.println("Input title search keywords");
 
 	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
-	String article_num = reader.readLine();
-	if(Integer.parseInt(article_num) > 10000 || Integer.parseInt(article_num) < 1) {
-		System.out.println("Invalid number");
-		return;
-	}
-	stmt = conn.createStatement();
-	rs = stmt.executeQuery("SELECT Title, Body From articles Where id="+article_num);
+	String article_title = reader.readLine();
+	pstmt = conn.prepareStatement("SELECT Title FROM articles WHERE Title Like ?");
+	pstmt.setString(1, article_title+"%");
+	rs = pstmt.executeQuery();
 	ResultSetMetaData rs_md = rs.getMetaData();
         int num_columns = rs_md.getColumnCount();
 	while(rs.next()) {
